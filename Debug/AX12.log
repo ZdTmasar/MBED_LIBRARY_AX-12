@@ -1,0 +1,24 @@
+﻿  
+  Obsolete PIO Core v3.4.1 is used (previous was 3.5.0b3)
+  
+  Please remove multiple PIO Cores from a system:
+  http://docs.platformio.org/page/faq.html#multiple-pio-cores-in-a-system
+  
+  [11/24/17 18:44:25] Processing nucleo_f429zi (platform: ststm32; board: nucleo_f429zi; framework: mbed)
+  
+  Verbose mode can be enabled via `-v, --verbose` option
+  Collected 22 compatible libraries
+  Looking for dependencies...
+  Project does not have dependencies
+  Compiling .pioenvs\nucleo_f429zi\src\main.o
+  Linking .pioenvs\nucleo_f429zi\firmware.elf
+  Checking program size
+  text	   data	    bss	    dec	    hex	filename
+  37024	   2504	  58736	  98264	  17fd8	.pioenvs\nucleo_f429zi\firmware.elf
+  Building .pioenvs\nucleo_f429zi\firmware.bin
+  Looking for upload disk...
+  Use manually specified: F:/
+  Uploading .pioenvs\nucleo_f429zi\firmware.bin
+  Firmware has been successfully uploaded.
+  (Some boards may require manual hard reset)
+   [SUCCESS] Took 17.68 seconds 
