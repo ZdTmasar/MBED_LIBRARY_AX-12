@@ -1,26 +1,32 @@
+#pragma once
 #include "mbed.h"
 #include "constantes.h"
-//#include <string>
+
 
 
 
 class Comm_AX12
 {
 public:
+	Comm_AX12();
 	Comm_AX12(PinName _PinCommRx, PinName _PinCommTx); // Baudrate par défaut
 	Comm_AX12(PinName _PinCommRx, PinName _PinCommTx, int _Baudrate); // Baudrate décidé par l'utilisateur
 	~Comm_AX12();
-	int Send(char _length, char _instr, char _parameters[8]); //En broadcast
-	int Send(char _ID, char _length, char _instr, char _parameters[8]); //à un AX12 précis
-	char* Receive();
+	int Send(char _length, char _instr, char *_parameters); //En broadcast
+	int Send(char _ID, char _length, char _instr, char *_parameters); //à un AX12 précis
+	int Receive(char *reponse);
 	bool getStatus();
+	void debuggage(char msg);
 
 private:
-	Serial *port_com;
+	Serial *port_com_in;
+	Serial *port_com_out;
 	Serial *debug;
-	char Checksum(char _stream[10]); //stream = ID + Stream + Instruction + Parameter1 + etc...
+	char Checksum(char _length, char _instr, char *parameter);
+	char Checksum(char _ID, char _length, char instr, char *parameter);
 
-	bool *busy;
+	// Attributs
+	bool busy;
 	PinName Tx;
 	PinName Rx;
 	int Baud;

@@ -60,3 +60,21 @@
 #define ACTION (0x05)
 #define RESET (0x06)
 #define SYNC_WRITE (0x83)
+
+#define LOW_MASK 0b0000000011111111
+#define HIGH_MASK ~LOW_MASK
+#define NORMAL_SPEED_LOW 0x00
+#define NORMAL_SPEED_HIGH 0x02
+
+#define DEFAULT_RX (PinName) PE_7
+#define DEFAULT_TX (PinName) PE_8
+
+#define BROADCAST_ID 0xFE
+#define TEMP_MAX 0xFF
+#define VOLT_L 0x5A
+#define VOLT_H 0x8C
+#define TORQUE_L 0xFF
+#define TORQUE_H 0x03
+#define RETURN_STATUS 0x01
+#define LED_BLINK 0x20
+#define SHUTDOWN 0x00
