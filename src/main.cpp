@@ -3,51 +3,33 @@
 #include "AX12.h"
 
 
-
+//Exemple code
 int main() {
-	Comm_AX12 test_com(PG_9, PG_14);
-	//Comm_AX12 port_com(DEFAULT_RX, DEFAULT_TX);
+	Comm_AX12 test_com(PD_6, PD_5);
 
+	
 	AX12 number1(0x04, &test_com);
-	//AX12 number2(0x08, &test_com);
+	AX12 number2(0x01, &test_com);
+	AX12 all(&test_com); //a object that will control all the AX12 on the bus because his adress by default is BROADCAST
 
-	//char parameter[] = { ID, 0x04 };
-	//test_com.Send(0x04, WRITE_DATA, parameter);
-	//char parameters[] = { 0x1E, 0x00, 0x02, 0x00, 0x02 };
-	//test_com.Send(0x04, 0x07, WRITE_DATA, parameters);
 
-	//test_com.debuggage(0x00);
-	//test.SetID(0x01);
-	//wait(1);
-	//port_com.debuggage(0x00);
+	number1.Init();
+	number2.Init();
 
-	/*unsigned short _DesiredPos = 0;
-	unsigned short position = _DesiredPos / 0.3;
-	port_com.debuggage((char)(position & LOW_MASK));
-	port_com.debuggage((char)((position & HIGH_MASK) >> 8));
-	char parameters[8] = { GOAL_POSITION_L, (char)(position & LOW_MASK), (char)((position & HIGH_MASK) >> 8), NORMAL_SPEED_LOW, NORMAL_SPEED_HIGH };
-	test_com.Send(0x04, 0x07, WRITE_DATA, parameters);*/
-
-	number1.EndlessTurn(1, 10);
-	wait(2);
 	number1.EndlessTurn(1, 50);
-	wait(2);
-	number1.EndlessTurn(0, 20);
+	number2.EndlessTurn(0, 50);
+	//Both motors will turn at the same speed (50rpm) but on in CW and the other in CCW
+
 	wait(5);
 
-	
-	//wait(3);
-	//number2.GoToPosition(120, 0);
+	number1.GoToPosition(0, 10); //the first one will go to the angle 0° at the speed of 10RPM
+	number2.GoToPosition(200); //the second one will go to the angle 200° at the maximum speed available
 
-	
-	//port_com.debuggage(0xAA);
-	//test_com.Send(0x01, 0x07, WRITE_DATA, parameterss);
-	//wait(5);
-	//port_com.debuggage(0xBB);
-	//test_com.Send(0x01, 0x07, WRITE_DATA, parameters);
+	wait(5);
 
+	all.EndlessTurn(1, 40); //both of the AX12 will turn at the same speed and in the same direction
 
-	
+	wait(5);
 	
 	return 0;
 }

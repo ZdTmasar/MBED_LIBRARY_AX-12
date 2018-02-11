@@ -9,11 +9,11 @@ class Comm_AX12
 {
 public:
 	Comm_AX12();
-	Comm_AX12(PinName _PinCommRx, PinName _PinCommTx); // Baudrate par défaut
-	Comm_AX12(PinName _PinCommRx, PinName _PinCommTx, int _Baudrate); // Baudrate décidé par l'utilisateur
+	Comm_AX12(PinName _PinCommRx, PinName _PinCommTx); // defautl Baudrate
+	Comm_AX12(PinName _PinCommRx, PinName _PinCommTx, int _Baudrate); // Specific Baudrate
 	~Comm_AX12();
-	int Send(char _length, char _instr, char *_parameters); //En broadcast
-	int Send(char _ID, char _length, char _instr, char *_parameters); //à un AX12 précis
+	int Send(char _length, char _instr, char *_parameters); //BROADCASR
+	int Send(char _ID, char _length, char _instr, char *_parameters); //TO A SPECIFIC AX12
 	int Receive(char *reponse);
 	bool getStatus();
 	void debuggage(char msg);

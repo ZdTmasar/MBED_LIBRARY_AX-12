@@ -4,7 +4,7 @@
   Please remove multiple PIO Cores from a system:
   http://docs.platformio.org/page/faq.html#multiple-pio-cores-in-a-system
   
-  [12/20/17 19:09:51] Processing nucleo_f429zi (platform: ststm32; board: nucleo_f429zi; framework: mbed)
+  [02/09/18 17:34:03] Processing nucleo_f429zi (platform: ststm32; board: nucleo_f429zi; framework: mbed)
   
   Verbose mode can be enabled via `-v, --verbose` option
   Collected 22 compatible libraries
@@ -14,11 +14,31 @@
   Linking .pioenvs\nucleo_f429zi\firmware.elf
   Checking program size
   text	   data	    bss	    dec	    hex	filename
-  37376	   2500	  58724	  98600	  18128	.pioenvs\nucleo_f429zi\firmware.elf
+  37648	   2500	  58740	  98888	  18248	.pioenvs\nucleo_f429zi\firmware.elf
   Building .pioenvs\nucleo_f429zi\firmware.bin
   Looking for upload disk...
   Use manually specified: F:/
   Uploading .pioenvs\nucleo_f429zi\firmware.bin
   Firmware has been successfully uploaded.
   (Some boards may require manual hard reset)
-   [SUCCESS] Took 7.28 seconds 
+   [SUCCESS] Took 22.26 seconds 
+  Updating tool-pioplus                    @ 0.13.7         [0.13.8]
+  
+  Uninstalling tool-pioplus @ 0.13.7: 	[OK]
+  CorePackageManager: Installing tool-pioplus @ 0.13.8
+  
+  Downloading...
+  Unpacking...
+  tool-pioplus @ 0.13.8 has been successfully installed!
+  
+  
+  
+  
+  There is a new version 3.5.1 of PlatformIO available.
+  
+  Please upgrade it via `platformio upgrade` or `pip install -U platformio` command.
+  Changes: http://docs.platformio.org/en/latest/history.html
+  
+  
+  
+  

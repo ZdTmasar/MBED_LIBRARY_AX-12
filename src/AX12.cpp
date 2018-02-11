@@ -1,15 +1,22 @@
 #include "AX12.h"
 
+
+//void constructor, not usefull
 AX12::AX12()
 {
 }
 
+//constructor specifying the communication port. The ID chosen will be BROADCAST ID. It can be used to
+//build a class reffering to all the AX-12 on the port.
 AX12::AX12(Comm_AX12 *_port_com)
 {
 	port_com = _port_com;
+	ActualID = BROADCAST_ID;
 	MaJ();
 }
 
+
+//constructor with a specified ID and port. 
 AX12::AX12(char _ID, Comm_AX12 *_port_com)
 {
 
@@ -18,6 +25,7 @@ AX12::AX12(char _ID, Comm_AX12 *_port_com)
 	MaJ();
 }
 
+//constructor with specified ID, port and Baudrate
 AX12::AX12(char _ID, char _Baud, Comm_AX12 *_port_com)
 {
 	port_com = _port_com;
@@ -25,21 +33,26 @@ AX12::AX12(char _ID, char _Baud, Comm_AX12 *_port_com)
 	MaJ();
 }
 
-
+//NOT IMPLEMENTADED YET
 void AX12::Moving()
 {
 }
 
+//NOT IMPLEMENTADED YET
 char AX12::Status()
 {
 	return 0;
 }
+
+//NOT IMPLEMENTADED YET
 void AX12::MaJ()
 {
 }
 
+//Angle command. Deired position with a Desired Speed. Position is in angle (degree) and speed in RPM.
 bool AX12::GoToPosition(short _DesiredPos, short _DesiredSpeed){
-
+	char parameter[] = { CW_ANGLE_LIMIT_L , 0x00, 0x00, 0xFF, 0x03 };
+	port_com->Send(ActualID, 0x07, WRITE_DATA, parameter);
 	short position = _DesiredPos / 0.3;
 	short speed = _DesiredSpeed / 0.1;
 	char parameters[] = { GOAL_POSITION_L, (position & LOW_MASK), (position & HIGH_MASK) >> 8, (char)(speed & LOW_MASK), (char)((speed & HIGH_MASK) >> 8) };
@@ -48,7 +61,10 @@ bool AX12::GoToPosition(short _DesiredPos, short _DesiredSpeed){
 	return 0;
 }
 
+//Angle command but at default speed. in degree
 bool AX12::GoToPosition(short _DesiredPos) {
+	char parameter[] = { CW_ANGLE_LIMIT_L , 0x00, 0x00, 0xFF, 0x03 };
+	port_com->Send(ActualID, 0x07, WRITE_DATA, parameter);
 	short position = _DesiredPos / 0.3;
 	char parameters[] = { GOAL_POSITION_L, (char)(position & LOW_MASK), (char)(position >> 8), NORMAL_SPEED_LOW, NORMAL_SPEED_HIGH};
 	
@@ -56,6 +72,8 @@ bool AX12::GoToPosition(short _DesiredPos) {
 
 	return 0;
 }
+
+// Endless turn (in RPM) direction is 0 or 1S
 bool AX12::EndlessTurn(char _direction, short _DesiredSpeed)
 {
 	char parameter[] = { CW_ANGLE_LIMIT_L , 0x00, 0x00, 0x00, 0x00 };
@@ -67,6 +85,7 @@ bool AX12::EndlessTurn(char _direction, short _DesiredSpeed)
 	port_com->Send(ActualID, 0x05, WRITE_DATA, parameters);
 	return 0;
 }
+
 bool AX12::Init()
 {
 	char parameters1[] = { CW_ANGLE_LIMIT_H, 0x00, 0x00, 0x9B, 0x02 };
@@ -93,7 +112,7 @@ bool AX12::SetTorqueMax(short _TorqueLim){
 }
 
 void AX12::FindID(){
-	char *rep;
+	/*char *rep;
 	int i = 0;
 	char ID_test = 0x00;
 	ActualID = 0xFF;
@@ -114,7 +133,7 @@ void AX12::FindID(){
 			port_com->debuggage(0xFE);
 			ActualID = 0xFE;
 		}
-	}
+	}*/
 }
 
 char AX12::GetID()
@@ -122,6 +141,7 @@ char AX12::GetID()
 	return ActualID;
 }
 
+//Set the ID of all the AX12 on the port
 void AX12::SetID(char _ID)
 {
 	char parameter[] = { ID, _ID };

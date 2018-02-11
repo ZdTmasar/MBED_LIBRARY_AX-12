@@ -8,19 +8,19 @@
 class AX12{
 public:
 	AX12();
-	AX12(Comm_AX12 *_port_com); //On ne connait pas l'ID de l'AX
-	AX12(char _ID, Comm_AX12 *_port_com); //Avec le baudrate par défaut
-	AX12(char _ID, char _Baud, Comm_AX12 *_port_com); //Avec baudrate décidé
+	AX12(Comm_AX12 *_port_com); //If we don't know the adress
+	AX12(char _ID, Comm_AX12 *_port_com); //with default baudrate
+	AX12(char _ID, char _Baud, Comm_AX12 *_port_com); //with specific baudrate
 	~AX12();
 	void FindID();
 	char GetID();
 	void SetID(char _ID);
-	int GetVoltage(); //value / 10 = temp
+	int GetVoltage(); //(value / 10) = temp
 	int GetPosition(); 
 	int GetTemperature();
 	int GetLoad();
 	bool GetMovement();
-	bool GoToPosition(short _DesiredPos, short _DesiredSpeed); //1 bit = 0.112 RPM //1 bit = 0.293 deg
+	bool GoToPosition(short _DesiredPos, short _DesiredSpeed); //just use angle and RPM  (1 bit = 0.112 RPM //1 bit = 0.293 deg)
 	bool GoToPosition(short _DesiredPos);
 	bool EndlessTurn(char _direction, short _DesiredSpeed);
 	bool Init();
